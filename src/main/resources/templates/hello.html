@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:each="x : ${names}" th:text="${x}">XXX</p>
+<ul>
+    <li th:each="x : ${names}" th:text="${x}"></li>
+</ul>
+<hr>
+<h1 th:text="${name}">hello.html</h1>
+<!--
+    th:text -> 替换标签中的文字
+    th:属性 -> 替换原属性的值
+    th:if -> 判断
+    th:each -> 循环，each所在的标签会每循环一次生成一个
+-->
+<div class="hello" th:class="${name}" th:id="${name}"></div>
+<h2>你好</h2>
+<input type="text" value="哈哈" th:value="${name}">
+<h2>哈哈</h2>
+<p th:if="${username != null}">XXXXX</p>
+<h2>呵呵</h2>
+<img th:src="${src}" src="https://docs.spring.io/spring-boot/docs/1.5.18.RELEASE/reference/htmlsingle/images/note.png" alt="">
+
+</body>
+</html>
