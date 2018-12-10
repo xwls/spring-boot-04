@@ -1,7 +1,10 @@
 package com.hwua.springboot04.po;
 
+import org.hibernate.validator.constraints.Length;
+
 public class Product {
     private Integer id;
+    @Length(min = 10,message = "名字不能小于10个长度")
     private String name;
     private String imgUrl;
     private Double price;

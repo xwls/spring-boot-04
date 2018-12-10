@@ -66,3 +66,17 @@ Thymeleaf模板引擎
             }
 
         }
+
+8. 自定义错误页面
+    DefaultErrorAttributes：错误页面包含的数据
+        timestamp：时间戳
+        status：错误码
+        error：错误信息
+        exception：异常
+        message：异常信息
+        path：发生错误的地址
+    在templates文件夹下新建error文件夹
+        - 404.html -> 404错误
+        - 500.html -> 500错误
+        - 4xx.html -> 4开头的错误(精确匹配到的优先)
+        - 5xx.html -> 5开头的错误(精确匹配到的优先)

@@ -17,7 +17,7 @@
 </head>
 
 <body class="text-center">
-<form class="form-signin" th:action="@{/doLogin}">
+<form class="form-signin" th:action="@{/doLogin}" method="post">
     <img class="mb-4" th:src="@{/bootstrap-solid.svg}" src="../static/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
     <p th:if="${param.msg != null}" th:text="${param.msg}" class="text-danger"></p>

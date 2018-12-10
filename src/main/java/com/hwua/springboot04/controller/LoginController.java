@@ -13,6 +13,9 @@ public class LoginController {
 
     @RequestMapping("/doLogin")
     public String doLogin(String username, String password, HttpSession session) throws UnsupportedEncodingException {
+        if ("lisi".equals(username)){
+            throw new RuntimeException("李四不让登");
+        }
         if (!StringUtils.isEmpty(username) && "123456".equals(password)){
             //登录成功
             session.setAttribute("username",username);

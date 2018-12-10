@@ -35,7 +35,7 @@ public class AppConfig {
                         //拦截路径
                         .addPathPatterns("/**")
                         //排除路径
-                        .excludePathPatterns("/login","/doLogin");
+                        .excludePathPatterns("/login","/doLogin","/error/**");
             }
         };
         return webMvcConfigurerAdapter;

@@ -5,6 +5,7 @@ import com.hwua.springboot04.po.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -33,7 +34,7 @@ public class ProductController {
     }
 
     @PostMapping("/product")
-    public String save(Product product){
+    public String save(@Validated Product product){
         boolean save = productDao.save(product);
         return "redirect:/products";
     }
