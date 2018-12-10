@@ -37,4 +37,32 @@ Thymeleaf模板引擎
     - **/favicon.ico ：在任意路径访问favicon.ico，都会映射到静态资源根目录下的favicon.ico
 6. 国际化（i18n）
     1). 准备国际化资源文件(xxx.properties)
+    2). 在application.yml中配置国际化资源文件
+        spring:
+          messages:
+            basename: login
     2). 在页面使用#{xx}取出资源文件中的值
+7. 通过链接设置国际化
+    1). 在链接中添加代表语言的请求参数
+        th:href="@{/login(lang='zh_CN')}"
+    2). 自定义LocaleResolver
+        @Override
+        public Locale resolveLocale(HttpServletRequest httpServletRequest) {
+            String lang = httpServletRequest.getParameter("lang");
+            if (!StringUtils.isEmpty(lang)){
+                //zh_CN / en_US
+                String[] split = lang.split("_");
+                return new Locale(split[0],split[1]);
+            }
+            return Locale.getDefault();
+        }
+    3). 配置LocaleResolver
+        @Configuration
+        public class AppConfig {
+
+            @Bean
+            public LocaleResolver localeResolver(){
+                return new MyLocaleResolver();
+            }
+
+        }

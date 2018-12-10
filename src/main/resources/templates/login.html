@@ -17,13 +17,14 @@
 </head>
 
 <body class="text-center">
-<form class="form-signin">
+<form class="form-signin" th:action="@{/doLogin}">
     <img class="mb-4" th:src="@{/bootstrap-solid.svg}" src="../static/bootstrap-solid.svg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal" th:text="#{login.tip}">Please sign in</h1>
-    <label for="inputEmail" class="sr-only" th:text="#{login.username}">UserName</label>
-    <input type="email" id="inputEmail" class="form-control" th:placeholder="#{login.username}" placeholder="UserName" required autofocus>
+    <p th:if="${param.msg != null}" th:text="${param.msg}" class="text-danger"></p>
+    <label for="inputUsername" class="sr-only" th:text="#{login.username}">UserName</label>
+    <input type="text" name="username" id="inputUsername" class="form-control" th:placeholder="#{login.username}" placeholder="UserName" required autofocus>
     <label for="inputPassword" class="sr-only" th:text="#{login.password}">Password</label>
-    <input type="password" id="inputPassword" class="form-control" th:placeholder="#{login.password}" placeholder="Password" required>
+    <input type="password" name="password" id="inputPassword" class="form-control" th:placeholder="#{login.password}" placeholder="Password" required>
     <div class="checkbox mb-3">
         <label>
             <!--双中括号取出文本内容-->
@@ -32,6 +33,8 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login.sign}">Sign in</button>
     <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    <a href="/login?lang=zh_CN" th:href="@{/login(lang='zh_CN')}">中文</a>&nbsp;&nbsp;
+    <a href="/login?lang=en_US" th:href="@{/login(lang='en_US')}">English</a>
 </form>
 </body>
 </html>
