@@ -1,0 +1,82 @@
+# Thymeleaf模板引擎
+
+1. 引入Thymeleaf
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+2. 替换版本为3
+    <properties>
+        <thymeleaf.version>3.0.2.RELEASE</thymeleaf.version>
+        <thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version>
+    </properties>
+3. 禁用thymeleaf的缓存
+    spring:
+      thymeleaf:
+        cache: false
+4. 常用语法
+    th:text -> 替换标签中的文字
+        <h1 th:text="${name}">hello.html</h1>
+    th:属性 -> 替换原属性的值
+        <div class="hello" th:class="${name}" th:id="${name}"></div>
+    th:if -> 判断
+        <p th:if="${username != null}">XXXXX</p>
+    th:each -> 循环，each所在的标签会每循环一次生成一个
+        <ul>
+            <li th:each="x : ${names}" th:text="${x}"></li>
+        </ul>
+5. 静态资源映射
+    - /webjars/** 映射到 classpath:/META-INF/resources/webjars/
+        例子：
+            * /webjars/jquery/2.2.0/jquery.min.js
+            * classpath:/META-INF/resources/webjars/jquery/2.2.0/jquery.min.js
+    - classpath:/META-INF/resources/
+    - classpath:/resources/
+    - classpath:/static/
+    - classpath:/public/
+    - **/favicon.ico ：在任意路径访问favicon.ico，都会映射到静态资源根目录下的favicon.ico
+6. 国际化（i18n）
+    1). 准备国际化资源文件(xxx.properties)
+    2). 在application.yml中配置国际化资源文件
+    
+        ```yaml
+        spring:
+          messages:
+            basename: login
+        ```
+        
+    2). 在页面使用#{xx}取出资源文件中的值
+7. 通过链接设置国际化
+    1). 在链接中添加代表语言的请求参数
+    
+        ```java
+        th:href="@{/login(lang='zh_CN')}" 
+        ```
+        
+    2). 自定义LocaleResolver
+    
+        ```java
+        @Override
+        public Locale resolveLocale(HttpServletRequest httpServletRequest) {
+            String lang = httpServletRequest.getParameter("lang");
+            if (!StringUtils.isEmpty(lang)){
+                //zh_CN / en_US
+                String[] split = lang.split("_");
+                return new Locale(split[0],split[1]);
+            }
+            return Locale.getDefault();
+        }
+        ```
+    3). 配置LocaleResolver
+    
+        ```java
+        @Configuration
+        public class AppConfig {
+
+            @Bean
+            public LocaleResolver localeResolver(){
+                return new MyLocaleResolver();
+            }
+
+        }
+        ```
