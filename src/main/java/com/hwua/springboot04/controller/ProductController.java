@@ -1,12 +1,12 @@
 package com.hwua.springboot04.controller;
 
 import com.hwua.springboot04.dao.ProductDao;
+import com.hwua.springboot04.po.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class ProductController {
@@ -19,6 +19,18 @@ public class ProductController {
     public String list(Model model){
         model.addAttribute("products",productDao.getAll());
         return "list";
+    }
+
+    @GetMapping("/product")
+    public String toAddForm(){
+        return "form";
+    }
+
+    @GetMapping("/product/{productId}")
+    public String toEditForm(@PathVariable Integer productId, Model model){
+        Product product = productDao.get(productId);
+        model.addAttribute("product",product);
+        return "form";
     }
 
 }
