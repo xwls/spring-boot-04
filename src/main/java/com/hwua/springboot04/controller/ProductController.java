@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class ProductController {
@@ -31,6 +32,12 @@ public class ProductController {
         Product product = productDao.get(productId);
         model.addAttribute("product",product);
         return "form";
+    }
+
+    @PostMapping("/product")
+    public String save(Product product){
+        boolean save = productDao.save(product);
+        return "redirect:/products";
     }
 
 }
