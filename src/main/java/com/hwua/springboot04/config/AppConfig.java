@@ -25,7 +25,7 @@ public class AppConfig {
 //                配置视图映射
                 registry.addViewController("/login").setViewName("login");
                 registry.addViewController("/main").setViewName("main");
-                registry.addViewController("/list").setViewName("list");
+//                registry.addViewController("/list").setViewName("list");
                 registry.addViewController("/hello").setViewName("hello");
             }
 
