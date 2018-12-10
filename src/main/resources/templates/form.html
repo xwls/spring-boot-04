@@ -25,6 +25,10 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <h2 class="pt-3" th:text="${product == null} ? '添加商品' : '编辑商品'">添加商品</h2>
             <form th:action="@{/product}" method="post">
+                <!--用来将post请求转换为put请求-->
+                <input th:if="${product != null}" type="hidden" name="_method" value="put">
+                <!--input标签的name属性的值应该是实体属性的属性名-->
+                <input th:if="${product != null}" type="hidden" name="id" value="" th:value="${product.id}">
                 <div class="form-group">
                     <label for="name">商品名</label>
                     <input type="text" class="form-control" id="name" name="name" th:value="${product!=null}?${product.name}" placeholder="商品名">
